@@ -26,8 +26,25 @@
                   <div *ngIf="password.errors.required">Password is required</div>
                   <div *ngIf="password.errors.minlength">Password must be at least 5 characters</div>
                 </div>
+                <hr>
+                <div class="form-group">
+                  <h5>Seleccionar image:</h5>
+                  <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
+                </div>
+                <div class="progress">
+                  <div [style.visibility]="(uploadPercent == 0) ? 'hidden' : 'visible'" class="progress-bar progress-bar-striped bg-success"
+                    role="progressbar" [style.width]="(uploadPercent | async) +'%'">
 
-                <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+                    <!-- <span class="progressText" *ngIf="urlImage | async">
+                      Ok!!</span> -->
+                  </div>
+                </div>
+                <br>
+                <input #imageUser type="hidden" [value]="urlImage | async">
+                <button *ngIf="urlImage | async; else btnDisabled" type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+                <ng-template #btnDisabled>
+                  <button type="submit" disabled=true class="btn btn-lg btn-secondary btn-block">Register</button>
+                </ng-template>
                 <div class="form-group">
                   <a routerLink="/user/login" class="form-control login-user">Do you have account?</a>
                 </div>
@@ -42,6 +59,7 @@
                   </button>
                 </div>
               </form>
+
             </div>
           </div>
         </div>
