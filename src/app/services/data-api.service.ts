@@ -30,6 +30,20 @@ export class DataApiService {
         });
       }));
   }
+
+
+  getAllBooksOffers() {
+    this.booksCollection = this.afs.collection('books', ref => ref.where('oferta', '==', '1'));
+    return this.books = this.booksCollection.snapshotChanges()
+      .pipe(map(changes => {
+        return changes.map(action => {
+          const data = action.payload.doc.data() as BookInterface;
+          data.id = action.payload.doc.id;
+          return data;
+        });
+      }));
+  }
+
   getOneBook(idBook: string) {
     this.bookDoc = this.afs.doc<BookInterface>(`books/${idBook}`);
     return this.book = this.bookDoc.snapshotChanges().pipe(map(action => {
