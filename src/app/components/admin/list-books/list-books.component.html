@@ -1,7 +1,6 @@
 <section class="row mt-5">
   <div class="col">
     <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalBook">New Book</button>
-    ADMIN: {{isAdmin}}
     <table class="table table-hover">
       <thead>
         <tr>
@@ -28,7 +27,7 @@
           </td>
           <ng-template #noOwner>
             <td>
-              <button class="btn btn-primary" disabled="true">Update</button>
+              <button class="btn btn-secondary" disabled="true">Update</button>
             </td>
           </ng-template>
           <td *ngIf="isAdmin == true; else noAdmin">
