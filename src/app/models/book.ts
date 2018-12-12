@@ -8,4 +8,5 @@ export interface BookInterface {
   autor?: string;
   oferta?: string;
   id?: string;
+  userUid?: string;
 }

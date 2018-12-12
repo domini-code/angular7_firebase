@@ -1,6 +1,7 @@
 <section class="row mt-5">
   <div class="col">
     <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalBook">New Book</button>
+    ADMIN: {{isAdmin}}
     <table class="table table-hover">
       <thead>
         <tr>
@@ -22,15 +23,25 @@
           <td>{{book.idioma}}</td>
           <td>{{book.precio}}</td>
           <td>{{book.oferta == 1 ? 'Sí': 'No'}}</td>
-          <td>
+          <td *ngIf="book.userUid == userUid || isAdmin == true; else noOwner">
             <button class="btn btn-primary" data-toggle="modal" data-target="#modalBook" (click)="onPreUpdateBook(book)">Update</button>
           </td>
-          <td>
+          <ng-template #noOwner>
+            <td>
+              <button class="btn btn-primary" disabled="true">Update</button>
+            </td>
+          </ng-template>
+          <td *ngIf="isAdmin == true; else noAdmin">
             <button class="btn btn-danger" (click)="onDeleteBook(book.id)">Delete</button>
           </td>
+          <ng-template #noAdmin>
+            <td>
+              <button class="btn btn-danger" disabled="true">Delete</button>
+            </td>
+          </ng-template>
         </tr>
       </tbody>
     </table>
   </div>
 </section>
-<app-modal></app-modal>
+<app-modal [userUid]="userUid"></app-modal>

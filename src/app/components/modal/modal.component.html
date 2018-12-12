@@ -12,6 +12,7 @@
       <div class="modal-body">
         <form name="formBook" #formBook="ngForm" (ngSubmit)="onSaveBook(formBook)">
           <input type="hidden" name="id" [(ngModel)]="this.dataApi.selectedBook.id">
+          <input type="text" name="userUid" [value]="userUid">
           <div class="form-group">
             <label for="titulo" class="col-form-label">Titulo:</label>
             <input type="text" class="form-control" name="titulo" [(ngModel)]="this.dataApi.selectedBook.titulo">
