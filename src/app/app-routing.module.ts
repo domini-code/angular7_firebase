@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { OffersComponent } from 'src/app/components/offers/offers.component';
 import { DetailsBookComponent } from './components/details-book/details-book.component';
@@ -9,6 +9,7 @@ import { RegisterComponent } from 'src/app/components/users/register/register.co
 import { ProfileComponent } from 'src/app/components/users/profile/profile.component';
 import { Page404Component } from './components/page404/page404.component';
 import { AuthGuard } from './guards/auth.guard';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
