@@ -15,7 +15,7 @@ import { Observable } from 'rxjs/internal/Observable';
 export class RegisterComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService, private storage: AngularFireStorage) { }
-  @ViewChild('imageUser') inputImageUser: ElementRef;
+  @ViewChild('imageUser', { static: true }) inputImageUser: ElementRef;
 
   public email: string = '';
   public password: string = '';
