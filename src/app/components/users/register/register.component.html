@@ -12,15 +12,16 @@
                   {{msgError}}
                 </div>
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="email" required minlength="8">
+                  <input type="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="email" required
+                    minlength="8">
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="email.touched && !email.valid">
                   <div *ngIf="email.errors.required">Email is required</div>
                   <div *ngIf="email.errors.minlength">Email must be at least 8 characters</div>
                 </div>
                 <div class="form-group">
-                  <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="password" required minlength="5"
-                    maxlength="10">
+                  <input type="password" name="password" class="form-control" placeholder="Password"
+                    [(ngModel)]="password" required minlength="5" maxlength="10">
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="password.touched && !password.valid">
                   <div *ngIf="password.errors.required">Password is required</div>
@@ -32,16 +33,16 @@
                   <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
                 </div>
                 <div class="progress">
-                  <div [style.visibility]="(uploadPercent == 0) ? 'hidden' : 'visible'" class="progress-bar progress-bar-striped bg-success"
-                    role="progressbar" [style.width]="(uploadPercent | async) +'%'">
-
+                  <div *ngIf="snapshot | async" class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                    [style.width]="(uploadPercent | async) +'%'">
                     <!-- <span class="progressText" *ngIf="urlImage | async">
                       Ok!!</span> -->
                   </div>
                 </div>
                 <br>
                 <input #imageUser type="hidden" [value]="urlImage | async">
-                <button *ngIf="urlImage | async; else btnDisabled" type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+                <button *ngIf="urlImage | async; else btnDisabled" type="submit"
+                  class="btn btn-lg btn-primary btn-block">Register</button>
                 <ng-template #btnDisabled>
                   <button type="submit" disabled=true class="btn btn-lg btn-secondary btn-block">Register</button>
                 </ng-template>

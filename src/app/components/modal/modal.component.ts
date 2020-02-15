@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ModalComponent implements OnInit {
 
-  constructor(private dataApi: DataApiService) { }
+  constructor(public dataApi: DataApiService) { }
   @ViewChild('btnClose', { static: true }) btnClose: ElementRef;
   @Input() userUid: string;
   ngOnInit() {
@@ -18,7 +18,7 @@ export class ModalComponent implements OnInit {
 
   onSaveBook(bookForm: NgForm): void {
     if (bookForm.value.id == null) {
-      // New 
+      // New
       bookForm.value.userUid = this.userUid;
       this.dataApi.addBook(bookForm.value);
     } else {

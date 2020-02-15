@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth, private router: Router, private authService: AuthService) { }
   public email: string = '';
   public password: string = '';
+  public isError = false;
   ngOnInit() {
   }
 

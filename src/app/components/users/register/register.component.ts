@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 
 
@@ -17,11 +17,14 @@ export class RegisterComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService, private storage: AngularFireStorage) { }
   @ViewChild('imageUser', { static: true }) inputImageUser: ElementRef;
 
-  public email: string = '';
-  public password: string = '';
+  public email: any = '';
+  public password: any = '';
+  public isError = false;
 
   uploadPercent: Observable<number>;
   urlImage: Observable<string>;
+  public snapshot: Observable<any>;
+
 
   ngOnInit() {
   }
@@ -34,8 +37,13 @@ export class RegisterComponent implements OnInit {
     const ref = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
     this.uploadPercent = task.percentageChanges();
-    task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
+    this.snapshot = task.snapshotChanges().pipe(
+      tap(console.log),
+      finalize(async () => {
+        this.urlImage = await ref.getDownloadURL().toPromise();
+      }));
   }
+
   onAddUser() {
     this.authService.registerUser(this.email, this.password)
       .then((res) => {

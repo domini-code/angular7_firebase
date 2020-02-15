@@ -10,7 +10,7 @@ import { BookInterface } from 'src/app/models/book';
 export class OffersComponent implements OnInit {
 
   constructor(private dataApi: DataApiService) { }
-  private books: BookInterface[];
+  public books: BookInterface[];
   ngOnInit() {
     this.getOffers();
     console.log('OFERTAS', this.books);
